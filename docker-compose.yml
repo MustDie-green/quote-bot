@@ -17,7 +17,7 @@ services:
             - ./config:/app/config
     mongo:
         restart: always
-        image: mongo
+        image: mongo:4.4.6
         volumes:
             - ./data/db:/data/db
         networks:

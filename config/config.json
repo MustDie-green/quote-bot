@@ -1,15 +1,15 @@
 {
-  "adminId": 66478514,
+  "adminId": 62323249,
   "globalStickerSet": {
-    "ownerId": 66478514,
+    "ownerId": 62323249,
     "name": "created_by_",
     "save_sticker_count": 1
   },
   "adv": {
-    "moderationChat": 66478514
+    "moderationChat": 62323249
   },
   "donate": {
-    "chatId": 66478514,
-    "messageId": 172634725
+    "chatId": 62323249,
+    "messageId": 219128
   }
 }
