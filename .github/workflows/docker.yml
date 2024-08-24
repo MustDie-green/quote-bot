@@ -15,9 +15,10 @@ jobs:
         name: Build Image
         runs-on: ubuntu-latest
         permissions:
-          contents: read
+          contents: write
           packages: write
           id-token: write
+          attestations: write
     
         steps:
           - name: Checkout repository
@@ -27,13 +28,13 @@ jobs:
             uses: robinraju/release-downloader@v1
             with:
               repository: ForNeVeR/tdlib.native
-              latest: true
-              fileName: tdlib.linux.zip
+              tag: 'v1.8.29'
+              fileName: tdlib.native.ubuntu-20.04.x86-64.zip
           
           - name: Prepare TDLib
             run: |
               mkdir -p ${GITHUB_WORKSPACE}/helpers/tdlib/data
-              unzip tdlib.linux.zip -d ${GITHUB_WORKSPACE}/helpers/tdlib/data
+              unzip tdlib.native.ubuntu-20.04.x86-64.zip -d ${GITHUB_WORKSPACE}/helpers/tdlib/data
               
 
     
@@ -63,6 +64,7 @@ jobs:
                     type=raw,value=latest
                     type=ref,event=tag
                     type=sha
+
           - name: Build and push Docker image
             id: build-and-push
             uses: docker/build-push-action@v5
@@ -74,9 +76,9 @@ jobs:
               cache-from: type=gha
               cache-to: type=gha,mode=max
     
-          - name: Sign the published Docker image
-            if: ${{ github.event_name != 'pull_request' }}
-            env:
-              TAGS: ${{ steps.meta.outputs.tags }}
-              DIGEST: ${{ steps.build-and-push.outputs.digest }}
-            run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+          - name: Generate artifact attestation
+            uses: actions/attest-build-provenance@v1
+            with:
+              subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+              subject-digest: ${{ steps.build-and-push.outputs.digest }}
+              push-to-registry: true

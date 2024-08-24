@@ -2,7 +2,8 @@ version: '3'
 
 services:
     bot:
-        image: ghcr.io/cielneko/quote-bot
+        image: ghcr.io/mustdie-green/quote-bot:latest
+        platform: linux/x86_64
         env_file: .env-bot
         restart: always
         logging:
@@ -17,6 +18,7 @@ services:
             - ./config:/app/config
     mongo:
         restart: always
+        platform: linux/x86_64
         image: mongo:4.4.6
         volumes:
             - ./data/db:/data/db
@@ -24,6 +26,7 @@ services:
             - quotly
     api:
         image: ghcr.io/cielneko/quote-api
+        platform: linux/x86_64
         env_file: .env-api
         restart: always
         logging:

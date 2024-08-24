@@ -114,3 +114,11 @@ helpers/tdlib/data
 config/config.json
 
 .DS_Store
+
+.vscode
+
+.env-api
+
+.env-bot
+
+data/
