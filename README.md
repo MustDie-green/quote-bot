@@ -1,7 +1,7 @@
 # quote-bot
 Telegram quote bot
 
-Fork of https://github.com/CielNeko/quote-bot that fork of https://github.com/LyoSU/quote-bot
+A fork of https://github.com/CielNeko/quote-bot, which is a fork of https://github.com/LyoSU/quote-bot.
 
 Main difference from the original one:
 - You don't need to install prebuild tdlib, docker image already has it
@@ -10,7 +10,7 @@ Main difference from the original one:
 # Docker compose installation
 1) Pull this repo
 
-3) Edit `.env-bot.example` and `.env-api.example` and remove `.example`
+3) Edit `.env-bot.example` and `.env-api.example` and remove `.example` from filename
 
 5) Edit `config/config.json`
 
